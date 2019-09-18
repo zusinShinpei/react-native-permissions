@@ -35,7 +35,6 @@
 #endif
 
 #import "RNPLocation.h"
-#import "RNPBluetooth.h"
 #import "RNPNotification.h"
 #import "RNPAudioVideo.h"
 #import "RNPEvent.h"
@@ -136,9 +135,6 @@ RCT_REMAP_METHOD(getPermissionStatus, getPermissionStatus:(RNPType)type json:(id
         case RNPTypeReminder:
             status = [RNPEvent getStatus:@"reminder"];
             break;
-        case RNPTypeBluetooth:
-            status = [RNPBluetooth getStatus];
-            break;
         case RNPTypeNotification:
             status = [RNPNotification getStatus];
             break;
@@ -180,8 +176,6 @@ RCT_REMAP_METHOD(requestPermission, permissionType:(RNPType)type json:(id)json r
             return [RNPEvent request:@"event" completionHandler:resolve];
         case RNPTypeReminder:
             return [RNPEvent request:@"reminder" completionHandler:resolve];
-        case RNPTypeBluetooth:
-            return [self requestBluetooth:resolve];
         case RNPTypeNotification:
             return [self requestNotification:json resolve:resolve];
         case RNPTypeSpeechRecognition:
@@ -229,16 +223,6 @@ RCT_REMAP_METHOD(requestPermission, permissionType:(RNPType)type json:(id)json r
 
     [self.notificationMgr request:types completionHandler:resolve];
 
-}
-
-
-- (void) requestBluetooth:(RCTPromiseResolveBlock)resolve
-{
-    if (self.bluetoothMgr == nil) {
-        self.bluetoothMgr = [[RNPBluetooth alloc] init];
-    }
-
-    [self.bluetoothMgr request:resolve];
 }
 
 
