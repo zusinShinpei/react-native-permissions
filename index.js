@@ -23,7 +23,6 @@ const ASYNC_STORAGE_KEY = '@RNPermissions:didAskPermission:';
 const PERMISSIONS = Platform.select({
   ios: {
     backgroundRefresh: 'backgroundRefresh',
-    bluetooth: 'bluetooth',
     camera: 'camera',
     contacts: 'contacts',
     event: 'event',
